@@ -10,6 +10,6 @@ output "aws_efs_file_system" {
   description = "Outputs of the EFS created."
 
   value = {
-    this = var.create_efs ? aws_efs_file_system.this : null
+    this = var.create_efs ? aws_efs_file_system.this[0] : null
   }
 }
