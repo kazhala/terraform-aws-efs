@@ -14,6 +14,12 @@ variable "vpc_id" {
   type        = string
 }
 
+variable "vpc_cidr" {
+  description = "CIDR block of the VPC."
+  type        = string
+  default     = null
+}
+
 variable "performance_mode" {
   description = "The file system performance mode. Can be either 'generalPurpose' or 'maxIO'."
   type        = string

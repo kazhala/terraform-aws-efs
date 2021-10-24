@@ -13,6 +13,18 @@ resource "aws_security_group" "efs" {
   }
 }
 
+resource "aws_security_group_rule" "efs_ingress" {
+  # checkov:skip=CKV_AWS_23:Descriptions
+  count = var.security_group_ids == null && var.vpc_cidr != null ? 1 : 0
+
+  type              = "ingress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  security_group_id = aws_security_group.efs[0].id
+  cidr_blocks       = [var.vpc_cidr]
+}
+
 # tfsec:ignore:aws-vpc-no-public-egress-sgr
 # tfsec:ignore:aws-vpc-add-description-to-security-group
 resource "aws_security_group_rule" "efs_egress" {
